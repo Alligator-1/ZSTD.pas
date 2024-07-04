@@ -1,9 +1,10 @@
 unit ZSTD;
+{$modeswitch advancedrecords}
 
 interface
 
 uses
-  Windows, Classes, ZSTDLib;
+  Classes, ZSTDLib;
 
 type
   TZSTDCompressOptions = record
@@ -326,7 +327,7 @@ end;
 
 procedure TZSTDCompressOptions.Init;
 begin
-  ZeroMemory(@Self, SizeOf(Self));
+  FillChar(Self, SizeOf(Self), 0);
   CompressionLevel := ZSTD_CLEVEL_DEFAULT;
   DictIDFlag := True;
 end;
@@ -336,7 +337,7 @@ var
   Bounds: ZSTD_bounds;
 begin
   Bounds := ZSTD_cParam_getBounds(AParam);
-  ZSTDCheck(sZSTD_cParam_getBounds, Bounds.error);
+  ZSTDCheck(Bounds.error);
   Result := Bounds.lowerBound;
 end;
 
@@ -345,7 +346,7 @@ var
   Bounds: ZSTD_bounds;
 begin
   Bounds := ZSTD_cParam_getBounds(AParam);
-  ZSTDCheck(sZSTD_cParam_getBounds, Bounds.error);
+  ZSTDCheck(Bounds.error);
   Result := Bounds.upperBound;
 end;
 
@@ -518,7 +519,7 @@ begin
     ((JobSize          <> 0) and ((JobSize          < JobSizeMin)          or (JobSize          > JobSizeMax))) or
     ((OverlapLog       <> 0) and ((OverlapLog       < OverlapLogMin)       or (OverlapLog       > OverlapLogMax)))
   then
-    RaiseLastOSError(ERROR_INVALID_PARAMETER);
+    raise EArgumentException.Create('');
 end;
 
 //**************************************************************************************************
@@ -527,7 +528,7 @@ end;
 
 procedure TZSTDDecompressOptions.Init;
 begin
-  ZeroMemory(@Self, SizeOf(Self));
+  FillChar(Self, SizeOf(Self), 0);
 end;
 
 function TZSTDDecompressOptions.ParamMin(AParam: ZSTD_dParameter): Integer;
@@ -535,7 +536,7 @@ var
   Bounds: ZSTD_bounds;
 begin
   Bounds := ZSTD_dParam_getBounds(AParam);
-  ZSTDCheck(sZSTD_dParam_getBounds, Bounds.error);
+  ZSTDCheck(Bounds.error);
   Result := Bounds.lowerBound;
 end;
 
@@ -544,7 +545,7 @@ var
   Bounds: ZSTD_bounds;
 begin
   Bounds := ZSTD_dParam_getBounds(AParam);
-  ZSTDCheck(sZSTD_dParam_getBounds, Bounds.error);
+  ZSTDCheck(Bounds.error);
   Result := Bounds.upperBound;
 end;
 
@@ -563,7 +564,7 @@ begin
   if
     ((WindowLog <> 0) and ((WindowLog < WindowLogMin) or (WindowLog > WindowLogMax)))
   then
-    RaiseLastOSError(ERROR_INVALID_PARAMETER);
+    raise EArgumentException.Create('');
 end;
 
 //**************************************************************************************************
@@ -611,7 +612,7 @@ begin
             Output.dst := FStreamOutBuffer;
             Output.size := FStreamOutBufferSize;
             Output.pos := 0;
-            R := ZSTDCheck(sZSTD_compressStream2, ZSTD_compressStream2(FStream, Output, Input, ZSTD_e_end));
+            R := ZSTDCheck(ZSTD_compressStream2(FStream, Output, Input, ZSTD_e_end));
             if Output.pos > 0 then
               FDest.WriteBuffer(FStreamOutBuffer^, Output.pos);
             if R = 0 then Break;
@@ -629,13 +630,13 @@ end;
 function TZSTDCompressStream.Seek(const AOffset: Int64; AOrigin: TSeekOrigin): Int64;
 begin
   Result := 0; // Make compiler happy;
-  RaiseLastOSError(ERROR_INVALID_FUNCTION);
+  raise ENotImplemented.Create('');
 end;
 
 function TZSTDCompressStream.Read(var ABuffer; ACount: Longint): Longint;
 begin
   Result := 0; // Make compiler happy;
-  RaiseLastOSError(ERROR_INVALID_FUNCTION);
+  raise ENotImplemented.Create('');
 end;
 
 function TZSTDCompressStream.Write(const ABuffer; ACount: Longint): Longint;
@@ -660,26 +661,26 @@ begin
       if not Assigned(FStream) then
         raise EOutOfMemory.Create('');
       //ZSTDCheck(sZSTD_initCStream, ZSTD_initCStream(FStream, FLevel));
-      ZSTDCheck(sZSTD_CCtx_reset, ZSTD_CCtx_reset(FStream, ZSTD_reset_session_and_parameters));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_compressionLevel, FOptions.CompressionLevel));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_enableLongDistanceMatching, Bools[FOptions.EnableLongDistanceMatching]));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_windowLog, FOptions.WindowLog));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_hashLog, FOptions.HashLog));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_chainLog, FOptions.ChainLog));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_searchLog, FOptions.SearchLog));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_minMatch, FOptions.MinMatch));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_targetLength, FOptions.TargetLength));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_strategy, FOptions.Strategy));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_ldmHashLog, FOptions.LdmHashLog));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_ldmMinMatch, FOptions.LdmMinMatch));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_ldmBucketSizeLog, FOptions.LdmBucketSizeLog));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_ldmHashRateLog, FOptions.LdmHashRateLog));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_contentSizeFlag, Bools[FOptions.ContentSizeFlag]));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_checksumFlag, Bools[FOptions.ChecksumFlag]));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_dictIDFlag, Bools[FOptions.DictIDFlag]));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_nbWorkers, FOptions.Workers));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_jobSize, FOptions.JobSize));
-      ZSTDCheck(sZSTD_CCtx_setParameter, ZSTD_CCtx_setParameter(FStream, ZSTD_c_overlapLog, FOptions.OverlapLog));
+      ZSTDCheck(ZSTD_CCtx_reset(FStream, ZSTD_reset_session_and_parameters));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_compressionLevel, FOptions.CompressionLevel));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_enableLongDistanceMatching, Bools[FOptions.EnableLongDistanceMatching]));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_windowLog, FOptions.WindowLog));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_hashLog, FOptions.HashLog));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_chainLog, FOptions.ChainLog));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_searchLog, FOptions.SearchLog));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_minMatch, FOptions.MinMatch));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_targetLength, FOptions.TargetLength));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_strategy, FOptions.Strategy));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_ldmHashLog, FOptions.LdmHashLog));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_ldmMinMatch, FOptions.LdmMinMatch));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_ldmBucketSizeLog, FOptions.LdmBucketSizeLog));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_ldmHashRateLog, FOptions.LdmHashRateLog));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_contentSizeFlag, Bools[FOptions.ContentSizeFlag]));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_checksumFlag, Bools[FOptions.ChecksumFlag]));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_dictIDFlag, Bools[FOptions.DictIDFlag]));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_nbWorkers, FOptions.Workers));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_jobSize, FOptions.JobSize));
+      ZSTDCheck(ZSTD_CCtx_setParameter(FStream, ZSTD_c_overlapLog, FOptions.OverlapLog));
     end;
 
   Input.src := @ABuffer;
@@ -691,7 +692,7 @@ begin
       Output.dst := FStreamOutBuffer;
       Output.size := FStreamOutBufferSize;
       Output.pos := 0;
-      ZSTDCheck(sZSTD_compressStream2, ZSTD_compressStream2(FStream, Output, Input, ZSTD_e_continue));
+      ZSTDCheck(ZSTD_compressStream2(FStream, Output, Input, ZSTD_e_continue));
       if Output.pos > 0 then
         FDest.WriteBuffer(FStreamOutBuffer^, Output.pos);
     end;
@@ -737,7 +738,7 @@ begin
   if (AOrigin <> soCurrent) or (AOffset < 0) then
     begin
       Result := 0; // Make compiler happy;
-      RaiseLastOSError(ERROR_INVALID_FUNCTION);
+      raise ENotImplemented.Create('');
     end
   else
     begin
@@ -792,8 +793,8 @@ begin
       FStream := ZSTD_createDStream;
       if not Assigned(FStream) then
         raise EOutOfMemory.Create('');
-      ZSTDCheck(sZSTD_initDStream, ZSTD_initDStream(FStream));
-      ZSTDCheck(sZSTD_DCtx_setParameter, ZSTD_DCtx_setParameter(FStream, ZSTD_d_windowLogMax, FOptions.WindowLog));
+      ZSTDCheck(ZSTD_initDStream(FStream));
+      ZSTDCheck(ZSTD_DCtx_setParameter(FStream, ZSTD_d_windowLogMax, FOptions.WindowLog));
     end;
 
   Buffer := @ABuffer;
@@ -806,7 +807,7 @@ begin
         begin
           Source := FStreamOutBuffer;
           Inc(Source, FStreamOutBufferSizePos);
-          CopyMemory(Buffer, Source, AvailableCount);
+          Move(Source^, Buffer^, AvailableCount);
           Inc(FStreamOutBufferSizePos, AvailableCount);
           Inc(Buffer, AvailableCount);
           Dec(ACount, AvailableCount);
@@ -824,7 +825,7 @@ begin
           FInput.pos := 0;
         end;
 
-      ZSTDCheck(sZSTD_compressStream, ZSTD_decompressStream(FStream, FOutput, FInput));
+      ZSTDCheck(ZSTD_decompressStream(FStream, FOutput, FInput));
       if (FOutput.pos = 0) and (FInput.size = 0) then Break;
     end;
 end;
@@ -832,7 +833,7 @@ end;
 function TZSTDDecompressStream.Write(const ABuffer; ACount: Longint): Longint;
 begin
   Result := 0; // Make compiler happy;
-  RaiseLastOSError(ERROR_INVALID_FUNCTION);
+  raise ENotImplemented.Create('');
 end;
 
 end.

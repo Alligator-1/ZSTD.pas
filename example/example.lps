@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="example.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="4"/>
+        <CursorPos X="30" Y="20"/>
+        <UsageCount Value="31"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\ZSTDLib.pas"/>
+        <EditorIndex Value="3"/>
+        <CursorPos Y="12"/>
+        <UsageCount Value="16"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\fpclaztrunk\fpcsrc\rtl\win\sysosh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="31"/>
+        <CursorPos X="3" Y="26"/>
+        <UsageCount Value="9"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\ZSTD.pas"/>
+        <EditorIndex Value="4"/>
+        <CursorPos Y="8"/>
+        <UsageCount Value="16"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\mylibc\mylibc.pas"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="62" Y="14"/>
+        <UsageCount Value="16"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\rtl-generics\src\generics.hashes.pas"/>
+        <UnitName Value="Generics.Hashes"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1253"/>
+        <CursorPos X="10" Y="1271"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\inc\objpash.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="197"/>
+        <CursorPos X="23" Y="215"/>
+        <UsageCount Value="9"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\sysutils\sysutilh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="202"/>
+        <CursorPos X="19" Y="218"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\paszlib\src\zstream.pp"/>
+        <UnitName Value="ZStream"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="7"/>
+        <CursorPos X="26" Y="31"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="844" Column="42" TopLine="813"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="11" Column="47"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="528" Column="10" TopLine="499"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="574" Column="10" TopLine="545"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="640" Column="8" TopLine="611"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="646" Column="8" TopLine="617"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="669" Column="9" TopLine="640"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="10" Column="26"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="528" Column="40" TopLine="499"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="574" Column="40" TopLine="545"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="10" Column="26"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="11" Column="25"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="640" Column="35" TopLine="611"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="646" Column="35" TopLine="617"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="748" Column="39" TopLine="719"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTD.pas"/>
+        <Caret Line="844" Column="35" TopLine="813"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTDLib.pas"/>
+        <Caret Line="22" Column="11" TopLine="7"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTDLib.pas"/>
+        <Caret Line="26" Column="3" TopLine="3"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTDLib.pas"/>
+        <Caret Line="14" Column="18" TopLine="3"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTDLib.pas"/>
+        <Caret Line="15" Column="18" TopLine="3"/>
+      </Position>
+      <Position>
+        <Filename Value="example.lpr"/>
+        <Caret Line="5"/>
+      </Position>
+      <Position>
+        <Filename Value="..\ZSTDLib.pas"/>
+        <Caret Line="21" Column="19" TopLine="3"/>
+      </Position>
+      <Position>
+        <Filename Value="example.lpr"/>
+        <Caret Line="30" Column="6" TopLine="2"/>
+      </Position>
+      <Position>
+        <Filename Value="example.lpr"/>
+        <Caret Line="46" Column="20" TopLine="17"/>
+      </Position>
+      <Position>
+        <Filename Value="example.lpr"/>
+        <Caret Line="53" Column="16" TopLine="26"/>
+      </Position>
+      <Position>
+        <Filename Value="example.lpr"/>
+        <Caret Line="33" Column="17" TopLine="28"/>
+      </Position>
+      <Position>
+        <Filename Value="example.lpr"/>
+        <Caret Line="46" Column="56" TopLine="28"/>
+      </Position>
+      <Position>
+        <Filename Value="example.lpr"/>
+        <Caret Line="45" Column="23" TopLine="25"/>
+      </Position>
+      <Position>
+        <Filename Value="example.lpr"/>
+        <Caret Line="9" Column="50" TopLine="4"/>
+      </Position>
+      <Position>
+        <Filename Value="example.lpr"/>
+        <Caret Line="21" Column="12" TopLine="10"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>
